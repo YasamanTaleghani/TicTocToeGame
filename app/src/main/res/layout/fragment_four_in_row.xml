@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00BCD4"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -16,6 +17,7 @@
         android:layout_marginBottom="80dp"
         android:gravity="center"
         android:text="Game: 4 In a Row"
+        android:textColor="#040303"
         android:textSize="24sp" />
 
     <LinearLayout
