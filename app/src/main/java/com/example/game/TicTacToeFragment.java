@@ -68,9 +68,7 @@ public class TicTacToeFragment extends Fragment {
                         IsPlayed[finalI] = playersTurn%2;
                         playersTurn++;
                         mImageButtons[finalI].setEnabled(false);
-                        if (isGameOver()){
-
-                        }
+                        isGameOver();
 
                     }
                 }
@@ -78,7 +76,7 @@ public class TicTacToeFragment extends Fragment {
         }
     }
 
-    private boolean isGameOver(){
+    private void isGameOver(){
         boolean result = false;
 
         if (IsPlayed[0]+IsPlayed[1]+IsPlayed[2] == 3 || IsPlayed[3]+IsPlayed[4]+IsPlayed[5] == 3
@@ -89,7 +87,9 @@ public class TicTacToeFragment extends Fragment {
                     Snackbar.LENGTH_LONG).setActionTextColor(getResources().
                     getColor(android.R.color.holo_green_light )).show();
 
-            return true;
+            for (int i = 0; i < 9 ; i++) {
+                mImageButtons[i].setEnabled(false);
+            }
         } else if (IsPlayed[0]+IsPlayed[1]+IsPlayed[2] == 0 ||
                 IsPlayed[3]+IsPlayed[4]+IsPlayed[5] == 0
                 || IsPlayed[6]+IsPlayed[7]+IsPlayed[8] == 0 ||
@@ -102,10 +102,11 @@ public class TicTacToeFragment extends Fragment {
                     Snackbar.LENGTH_LONG).setActionTextColor(getResources().
                     getColor(android.R.color.holo_green_light )).show();
 
-            return true;
+            for (int i = 0; i < 9 ; i++) {
+                mImageButtons[i].setEnabled(false);
+            }
         }
 
-        return result;
     }
 
 }
