@@ -39,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
                     TicTacToeFragment ticTacToeFragment = new TicTacToeFragment();
                     fragmentManager.beginTransaction().add(R.id.Container, ticTacToeFragment).
                             commit();
+                } else{
+                    Fragment fragment1 = fragmentManager.findFragmentById(R.id.Container);
+                    fragmentManager.beginTransaction().remove(fragment1).
+                            commit();
+
+                    TicTacToeFragment ticTacToeFragment = new TicTacToeFragment();
+                    fragmentManager.beginTransaction().add(R.id.Container, ticTacToeFragment).
+                            commit();
                 }
             }
         });
@@ -50,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = fragmentManager.findFragmentById(R.id.Container);
 
                 if (fragment == null) {
+                    FourInRowFragment fourInRowFragment = new FourInRowFragment();
+                    fragmentManager.beginTransaction().add(R.id.Container, fourInRowFragment).
+                            commit();
+                }else{
+                    Fragment fragment1 = fragmentManager.findFragmentById(R.id.Container);
+                    fragmentManager.beginTransaction().remove(fragment1).
+                            commit();
+
                     FourInRowFragment fourInRowFragment = new FourInRowFragment();
                     fragmentManager.beginTransaction().add(R.id.Container, fourInRowFragment).
                             commit();
