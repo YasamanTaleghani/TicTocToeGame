@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().add(R.id.Container, fourInRowFragment).
                             commit();
                 }else{
-                    Fragment fragment1 = fragmentManager.findFragmentById(R.id.Container);
-                    fragmentManager.beginTransaction().remove(fragment1).
+                    Fragment fragment2 = fragmentManager.findFragmentById(R.id.Container);
+                    fragmentManager.beginTransaction().remove(fragment2).
                             commit();
 
                     FourInRowFragment fourInRowFragment = new FourInRowFragment();
