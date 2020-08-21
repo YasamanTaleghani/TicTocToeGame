@@ -2,6 +2,7 @@ package com.example.game;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class TicTacToeFragment extends Fragment {
 
+    public static final String BUNDLE_IS_PLAYED = "BundleIsPlayed";
+    public static final String BUNLDE_PLAYERS_TURN = "BunldePlayersTurn";
     private ImageButton[] mImageButtons = new ImageButton[9];
     private int[] IsPlayed = {5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5};
     private int playersTurn = 0;
@@ -35,6 +38,20 @@ public class TicTacToeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tic_tac_toe,container,false);
         findView(view);
         setListers();
+
+        if (savedInstanceState!=null){
+            playersTurn = savedInstanceState.getInt(BUNLDE_PLAYERS_TURN);
+            IsPlayed = savedInstanceState.getIntArray(BUNDLE_IS_PLAYED);
+            for (int i = 0; i < 9 ; i++) {
+                if (IsPlayed[i]==0) {
+                    mImageButtons[i].setBackgroundResource(R.drawable.cirle_icon);
+                    mImageButtons[i].setEnabled(false);
+                } else if (IsPlayed[i]==1){
+                    mImageButtons[i].setBackgroundResource(R.drawable.close_icon);
+                    mImageButtons[i].setEnabled(false);
+                }
+            }
+        }
         return view;
     }
 
@@ -76,7 +93,6 @@ public class TicTacToeFragment extends Fragment {
     }
 
     private void isGameOver(){
-        boolean result = false;
 
         if (IsPlayed[0]+IsPlayed[1]+IsPlayed[2] == 3 || IsPlayed[3]+IsPlayed[4]+IsPlayed[5] == 3
         || IsPlayed[6]+IsPlayed[7]+IsPlayed[8] == 3 || IsPlayed[0]+IsPlayed[3]+IsPlayed[6] == 3 ||
@@ -108,4 +124,10 @@ public class TicTacToeFragment extends Fragment {
 
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntArray(BUNDLE_IS_PLAYED,IsPlayed);
+        outState.putInt(BUNLDE_PLAYERS_TURN,playersTurn);
+    }
 }

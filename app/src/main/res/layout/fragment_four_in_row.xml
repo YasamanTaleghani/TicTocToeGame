@@ -57,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -107,19 +108,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn14"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/btn13"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/btn12"
+            android:id="@+id/btn10"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />
@@ -131,7 +120,19 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/btn10"
+            android:id="@+id/btn12"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn13"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn14"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />

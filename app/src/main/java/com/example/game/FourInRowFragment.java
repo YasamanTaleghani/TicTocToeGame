@@ -11,8 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Objects;
 
 public class FourInRowFragment extends Fragment {
 
@@ -75,7 +78,7 @@ public class FourInRowFragment extends Fragment {
                             mButtons[finalI].setBackgroundColor(Color.BLUE);
                         }
 
-                        IsPlayed[finalI] = playersTurn%2;
+                        IsPlayed[finalI] = playersTurn % 2;
                         playersTurn++;
                         mButtons[finalI].setEnabled(false);
                         isGameOver();
@@ -88,30 +91,58 @@ public class FourInRowFragment extends Fragment {
 
     private void isGameOver(){
 
-        for (int i = 0; i < 25 ; i++) {
-            if ( (i+3) < 5 && IsPlayed[i]+IsPlayed[i+1]+IsPlayed[i+2]+IsPlayed[i+3] == 4 ||
-                 (i+15) < 25 && IsPlayed[i]+IsPlayed[i+5]+IsPlayed[i+10]+IsPlayed[i+15] == 4){
-                Snackbar.make(getActivity().findViewById(android.R.id.content),"Player 2 wins",
-                        Snackbar.LENGTH_LONG).setActionTextColor(getResources().
-                        getColor(android.R.color.holo_green_light )).show();
+        int[] check = new int[]{IsPlayed[0]+IsPlayed[1]+IsPlayed[2]+IsPlayed[3],
+                                IsPlayed[1]+IsPlayed[2]+IsPlayed[3]+IsPlayed[4],
+                                IsPlayed[5]+IsPlayed[6]+IsPlayed[7]+IsPlayed[8],
+                                IsPlayed[6]+IsPlayed[7]+IsPlayed[8]+IsPlayed[9],
+                                IsPlayed[10]+IsPlayed[11]+IsPlayed[12]+IsPlayed[13],
+                                IsPlayed[11]+IsPlayed[12]+ IsPlayed[13]+IsPlayed[14],
+                                IsPlayed[15]+IsPlayed[16]+ IsPlayed[17]+IsPlayed[18],
+                                IsPlayed[16]+IsPlayed[17]+IsPlayed[18]+IsPlayed[19],
+                                IsPlayed[20]+IsPlayed[21]+IsPlayed[22]+IsPlayed[23],
+                                IsPlayed[21]+IsPlayed[22]+IsPlayed[23]+IsPlayed[24],
+                                IsPlayed[0]+IsPlayed[5]+IsPlayed[10]+IsPlayed[15],
+                                IsPlayed[5]+IsPlayed[10]+IsPlayed[15]+IsPlayed[20],
+                                IsPlayed[1]+IsPlayed[6]+IsPlayed[11]+IsPlayed[16],
+                                IsPlayed[6]+IsPlayed[11]+IsPlayed[16]+IsPlayed[21],
+                                IsPlayed[2]+IsPlayed[7]+IsPlayed[12]+IsPlayed[17],
+                                IsPlayed[7]+IsPlayed[12]+IsPlayed[17]+IsPlayed[22],
+                                IsPlayed[3]+IsPlayed[8]+IsPlayed[13]+IsPlayed[18],
+                                IsPlayed[8]+IsPlayed[13]+IsPlayed[18]+IsPlayed[23],
+                                IsPlayed[4]+IsPlayed[9]+IsPlayed[14]+IsPlayed[19],
+                                IsPlayed[9]+IsPlayed[14]+IsPlayed[19]+IsPlayed[24],
+                                IsPlayed[1]+IsPlayed[7]+IsPlayed[13]+IsPlayed[19],
+                                IsPlayed[0]+IsPlayed[6]+IsPlayed[12]+IsPlayed[18],
+                                IsPlayed[6]+IsPlayed[12]+IsPlayed[18]+IsPlayed[24],
+                                IsPlayed[5]+IsPlayed[11]+IsPlayed[17]+IsPlayed[23],
+                                IsPlayed[3]+IsPlayed[7]+IsPlayed[11]+IsPlayed[15],
+                                IsPlayed[4]+IsPlayed[8]+IsPlayed[12]+IsPlayed[16],
+                                IsPlayed[8]+IsPlayed[12]+IsPlayed[16]+IsPlayed[20],
+                                IsPlayed[9]+IsPlayed[13]+IsPlayed[17]+IsPlayed[21]};
 
-                for (int j = 0; j < 25 ; i++) {
+        for (int i = 0; i < check.length ; i++) {
+            if ( check[i] == 0 ){
+
+                Snackbar.make(getActivity().findViewById(android.R.id.content)
+                        ,"Player 1 wins", Snackbar.LENGTH_LONG).setActionTextColor(getResources
+                        ().getColor(android.R.color.holo_green_light )).show();
+
+                for (int j = 0; j < 25 ; j++) {
                     mButtons[j].setEnabled(false);
                 }
+                break;
 
-            } else if ((i+3) < 5 && IsPlayed[i]+IsPlayed[i+1]+IsPlayed[i+2]+IsPlayed[i+3] == 0 ||
-                    (i+15) < 25 && IsPlayed[i]+IsPlayed[i+5]+IsPlayed[i+10]+IsPlayed[i+15] == 0) {
-                Snackbar.make(getActivity().findViewById(android.R.id.content),"Player 1 wins",
-                        Snackbar.LENGTH_LONG).setActionTextColor(getResources().
-                        getColor(android.R.color.holo_green_light)).show();
+            } else if ( check[i] == 1 ) {
+                Snackbar.make(getActivity().findViewById(android.R.id.content)
+                        ,"Player 1 wins", Snackbar.LENGTH_LONG).setActionTextColor(getResources
+                        ().getColor(android.R.color.holo_green_light)).show();
 
-                for (int j = 0; j < 25; i++) {
+                for (int j = 0; j < 25; j++) {
                     mButtons[j].setEnabled(false);
                 }
-
+                break;
             }
         }
     }
-
 
 }
