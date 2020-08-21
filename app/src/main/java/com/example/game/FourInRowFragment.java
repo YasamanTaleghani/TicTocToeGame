@@ -21,6 +21,8 @@ public class FourInRowFragment extends Fragment {
 
     public static final String BUNDLE_PLAYERS_TURN = "BundlePlayersTurn";
     public static final String BUNDLE_IS_PLAYED = "BundleIsPlayed";
+    public static final String BUNDLE_ISPLAYED = "BundleIsplayed";
+    public static final String BUNDLE_PLAYERSTURN = "BundlePlayersturn";
     private Button[] mButtons = new Button[25];
     private int[] IsPlayed = {5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 ,
                               5 , 5 , 5 , 5 , 5 , 5 , 5 , 5};
@@ -41,8 +43,21 @@ public class FourInRowFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_four_in_row,container,false);
         findView(view);
         setListers();
-        return view;
 
+        if (savedInstanceState!=null){
+            playersTurn = savedInstanceState.getInt(BUNDLE_PLAYERSTURN);
+            IsPlayed = savedInstanceState.getIntArray(BUNDLE_ISPLAYED);
+            for (int i = 0; i < 25 ; i++) {
+                if (IsPlayed[i]==0) {
+                    mButtons[i].setBackgroundColor(Color.RED);
+                    mButtons[i].setEnabled(false);
+                } else if (IsPlayed[i]==1){
+                    mButtons[i].setBackgroundColor(Color.BLUE);
+                    mButtons[i].setEnabled(false);
+                }
+            }
+        }
+        return view;
     }
 
     private void findView(View view){
@@ -145,4 +160,10 @@ public class FourInRowFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntArray(BUNDLE_ISPLAYED,IsPlayed);
+        outState.putInt(BUNDLE_PLAYERSTURN,playersTurn);
+    }
 }
