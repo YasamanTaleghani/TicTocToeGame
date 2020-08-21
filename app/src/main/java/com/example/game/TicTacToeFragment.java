@@ -19,6 +19,7 @@ public class TicTacToeFragment extends Fragment {
     public static final String BUNDLE_IS_PLAYED = "BundleIsPlayed";
     public static final String BUNLDE_PLAYERS_TURN = "BunldePlayersTurn";
     private ImageButton[] mImageButtons = new ImageButton[9];
+    private Button mButtonSetting;
     private int[] IsPlayed = {5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5};
     private int playersTurn = 0;
 
@@ -63,6 +64,7 @@ public class TicTacToeFragment extends Fragment {
                                 view.findViewById(R.id.btn7), view.findViewById(R.id.btn8) ,
                                 view.findViewById(R.id.btn9)};
 
+        mButtonSetting = view.findViewById(R.id.btn_settingF);
     }
 
     private void setListers(){
@@ -90,6 +92,13 @@ public class TicTacToeFragment extends Fragment {
                 }
             });
         }
+
+        mButtonSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Todo
+            }
+        });
     }
 
     private void isGameOver(){

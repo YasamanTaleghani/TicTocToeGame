@@ -24,6 +24,7 @@ public class FourInRowFragment extends Fragment {
     public static final String BUNDLE_ISPLAYED = "BundleIsplayed";
     public static final String BUNDLE_PLAYERSTURN = "BundlePlayersturn";
     private Button[] mButtons = new Button[25];
+    private Button mButtonSetting;
     private int[] IsPlayed = {5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 ,
                               5 , 5 , 5 , 5 , 5 , 5 , 5 , 5};
     private int playersTurn = 0;
@@ -76,6 +77,7 @@ public class FourInRowFragment extends Fragment {
                 view.findViewById(R.id.btn21), view.findViewById(R.id.btn22),
                 view.findViewById(R.id.btn23), view.findViewById(R.id.btn24)};
 
+        mButtonSetting = view.findViewById(R.id.btn_setting);
     }
 
     private void setListers(){
@@ -102,6 +104,14 @@ public class FourInRowFragment extends Fragment {
                 }
             });
         }
+
+        mButtonSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Todo
+            }
+        });
+
     }
 
     private void isGameOver(){

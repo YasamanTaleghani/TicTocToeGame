@@ -110,4 +110,11 @@
             android:layout_marginLeft="5dp"
             android:layout_weight="1" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_settingF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Setting" />
 </LinearLayout>
