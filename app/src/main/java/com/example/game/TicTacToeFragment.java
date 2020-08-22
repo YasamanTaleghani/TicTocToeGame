@@ -1,8 +1,10 @@
 package com.example.game;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -18,11 +20,13 @@ public class TicTacToeFragment extends Fragment {
 
     public static final String BUNDLE_IS_PLAYED = "BundleIsPlayed";
     public static final String BUNLDE_PLAYERS_TURN = "BunldePlayersTurn";
+    public static final int REQUEST_SETTING = 0;
     private ImageButton[] mImageButtons = new ImageButton[9];
     private Button mButtonSetting;
     private int[] IsPlayed = {5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5};
     private int playersTurn = 0;
-
+    private String player1Name="Player 1";
+    private String player2Name="Player 2";
 
     public TicTacToeFragment() {
 
@@ -59,7 +63,7 @@ public class TicTacToeFragment extends Fragment {
 
     private void findView(View view){
 
-        mImageButtons = new ImageButton[]{view.findViewById(R.id.btn1), view.findViewById(R.id.btn2) ,
+        mImageButtons = new ImageButton[]{view.findViewById(R.id.btn1),view.findViewById(R.id.btn2),
                                 view.findViewById(R.id.btn3), view.findViewById(R.id.btn4) ,
                                 view.findViewById(R.id.btn5), view.findViewById(R.id.btn6) ,
                                 view.findViewById(R.id.btn7), view.findViewById(R.id.btn8) ,
@@ -97,7 +101,8 @@ public class TicTacToeFragment extends Fragment {
         mButtonSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Todo
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivityForResult(intent, REQUEST_SETTING);
             }
         });
     }
@@ -108,7 +113,7 @@ public class TicTacToeFragment extends Fragment {
         || IsPlayed[6]+IsPlayed[7]+IsPlayed[8] == 3 || IsPlayed[0]+IsPlayed[3]+IsPlayed[6] == 3 ||
         IsPlayed[1]+IsPlayed[4]+IsPlayed[7] == 3 || IsPlayed[2]+IsPlayed[5]+IsPlayed[8] == 3 ||
         IsPlayed[0]+IsPlayed[4]+IsPlayed[8] == 3 || IsPlayed[2]+IsPlayed[4]+IsPlayed[6] == 3){
-            Snackbar.make(getActivity().findViewById(android.R.id.content), "Player 2 wins",
+            Snackbar.make(getActivity().findViewById(android.R.id.content), player2Name+" wins",
                     Snackbar.LENGTH_LONG).setActionTextColor(getResources().
                     getColor(android.R.color.holo_green_light )).show();
 
@@ -123,7 +128,7 @@ public class TicTacToeFragment extends Fragment {
                 IsPlayed[2]+IsPlayed[5]+IsPlayed[8] == 0 ||
                 IsPlayed[0]+IsPlayed[4]+IsPlayed[8] == 0 ||
                 IsPlayed[2]+IsPlayed[4]+IsPlayed[6] == 0) {
-            Snackbar.make(getActivity().findViewById(android.R.id.content), "Player 1 wins",
+            Snackbar.make(getActivity().findViewById(android.R.id.content), player1Name+" wins",
                     Snackbar.LENGTH_LONG).setActionTextColor(getResources().
                     getColor(android.R.color.holo_green_light )).show();
 
@@ -139,5 +144,17 @@ public class TicTacToeFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putIntArray(BUNDLE_IS_PLAYED,IsPlayed);
         outState.putInt(BUNLDE_PLAYERS_TURN,playersTurn);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != SettingActivity.RESULT_OK || data == null)
+            return;
+
+        if (requestCode == REQUEST_SETTING) {
+            player1Name = data.getStringExtra(SettingActivity.PLAYER_1_NAME);
+            player2Name = data.getStringExtra(SettingActivity.PLAYER_2_NAME);
+        }
     }
 }

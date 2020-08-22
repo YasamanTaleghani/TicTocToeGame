@@ -1,9 +1,11 @@
 package com.example.game;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -23,11 +25,14 @@ public class FourInRowFragment extends Fragment {
     public static final String BUNDLE_IS_PLAYED = "BundleIsPlayed";
     public static final String BUNDLE_ISPLAYED = "BundleIsplayed";
     public static final String BUNDLE_PLAYERSTURN = "BundlePlayersturn";
+    public static final int REQUEST_SETTING = 0;
     private Button[] mButtons = new Button[25];
     private Button mButtonSetting;
     private int[] IsPlayed = {5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 ,
                               5 , 5 , 5 , 5 , 5 , 5 , 5 , 5};
     private int playersTurn = 0;
+    private String player1Name="Player 1";
+    private String player2Name="Player 2";
 
     public FourInRowFragment() {
         // Required empty public constructor
@@ -108,7 +113,8 @@ public class FourInRowFragment extends Fragment {
         mButtonSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Todo
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivityForResult(intent, REQUEST_SETTING);
             }
         });
 
@@ -149,7 +155,7 @@ public class FourInRowFragment extends Fragment {
             if ( check[i] == 0 ){
 
                 Snackbar.make(getActivity().findViewById(android.R.id.content)
-                        ,"Player 1 wins", Snackbar.LENGTH_LONG).setActionTextColor(getResources
+                        ,player1Name+" wins", Snackbar.LENGTH_LONG).setActionTextColor(getResources
                         ().getColor(android.R.color.holo_green_light )).show();
 
                 for (int j = 0; j < 25 ; j++) {
@@ -159,7 +165,7 @@ public class FourInRowFragment extends Fragment {
 
             } else if ( check[i] == 1 ) {
                 Snackbar.make(getActivity().findViewById(android.R.id.content)
-                        ,"Player 1 wins", Snackbar.LENGTH_LONG).setActionTextColor(getResources
+                        ,player2Name+"wins", Snackbar.LENGTH_LONG).setActionTextColor(getResources
                         ().getColor(android.R.color.holo_green_light)).show();
 
                 for (int j = 0; j < 25; j++) {
@@ -175,5 +181,17 @@ public class FourInRowFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putIntArray(BUNDLE_ISPLAYED,IsPlayed);
         outState.putInt(BUNDLE_PLAYERSTURN,playersTurn);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != SettingActivity.RESULT_OK || data == null)
+            return;
+
+        if (requestCode == REQUEST_SETTING) {
+            player1Name = data.getStringExtra(SettingActivity.PLAYER_1_NAME);
+            player2Name = data.getStringExtra(SettingActivity.PLAYER_2_NAME);
+        }
     }
 }
